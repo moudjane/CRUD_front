@@ -1,0 +1,8 @@
+.custom-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.custom-list-item {
+  margin-bottom: 5px;
+}
