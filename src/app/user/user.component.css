@@ -6,3 +6,94 @@
 .custom-list-item {
   margin-bottom: 5px;
 }
+
+th {
+  background-color: #557dff;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  width: 31%;
+}
+
+td{
+  background-color: #7cd0ff;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  width: 31%;
+}
+
+table {
+  width: 100%;
+}
+
+.delete-btn {
+  background-color: #ff557d;
+  color: white;
+  border-radius: 2.5px;
+  border: none;
+  padding: 2.5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.delete-btn:hover {
+  background-color: #ff0000;
+  color: white;
+}
+
+.add-user {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 2.5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
+
+.validate-btn {
+  background-color: #35ff00;
+  color: #fff;
+  border: none;
+  border-radius: 2.5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.validate-btn:hover {
+  background-color: #2ee753;
+}

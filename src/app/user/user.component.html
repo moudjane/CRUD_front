@@ -1,7 +1,76 @@
 <div>
-  <ul class="custom-list">
-    <li class="custom-list-item" *ngFor="let user of users">
-      {{ user.firstName }} {{ user.lastName }} - {{ user.occupation }} ({{ user.age }})
-    </li>
-  </ul>
+  <table class="custom-table">
+    <thead>
+    <tr>
+      <th>Full Name</th>
+      <th>Occupation</th>
+      <th>Age</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users" class="custom-table-row">
+      <td>
+        <span *ngIf="!user.editing">{{ user.firstName }} {{ user.lastName }}</span>
+        <input *ngIf="user.editing" [(ngModel)]="user.firstName" name="firstName" required>
+        <input *ngIf="user.editing" [(ngModel)]="user.lastName" name="lastName" required>
+      </td>
+      <td>
+        <span *ngIf="!user.editing">{{ user.occupation }}</span>
+        <input *ngIf="user.editing" [(ngModel)]="user.occupation" name="occupation" required>
+      </td>
+      <td>
+        <span *ngIf="!user.editing">{{ user.age }} years</span>
+        <input *ngIf="user.editing" [(ngModel)]="user.age" name="age" min="0" max="100" required>
+      </td>
+      <td>
+        <button class="edit-btn" *ngIf="!user.editing" (click)="editUser(user)">Edit</button>
+        <button class="validate-btn" *ngIf="user.editing" (click)="updateUser(user)">Validate</button>
+        <button class="delete-btn" (click)="deleteUser(user.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<br/>
+<br/>
+
+<div class="add-user">
+  <h2>Add User:</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="input-row">
+      <div class="input-container">
+        <label for="firstName">Firstname:</label>
+      </div>
+      <div class="input-container">
+        <input type="text" id="firstName" [(ngModel)]="newUser.firstName" name="firstName" required>
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="input-container">
+        <label for="lastName">Surname:</label>
+      </div>
+      <div class="input-container">
+        <input type="text" id="lastName" [(ngModel)]="newUser.lastName" name="lastName" required>
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="input-container">
+        <label for="occupation">Occupation:</label>
+      </div>
+      <div class="input-container">
+        <input type="text" id="occupation" [(ngModel)]="newUser.occupation" name="occupation" required>
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="input-container">
+        <label for="age">Age:</label>
+      </div>
+      <div class="input-container">
+        <input type="number" id="age" [(ngModel)]="newUser.age" name="age" min="0" max="100" required>
+      </div>
+    </div>
+    <button type="submit">Add</button>
+  </form>
 </div>

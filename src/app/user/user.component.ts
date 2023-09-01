@@ -1,13 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  occupation: string;
-  age: number;
-}
+import { UserService, User } from './user.service';
 
 @Component({
   selector: 'app-user',
@@ -16,17 +8,36 @@ interface User {
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
+  newUser: User = { id: 0, firstName: '', lastName: '', occupation: '', age: 0 };
 
-  constructor(private http: HttpClient) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.http.get<User[]>('http://localhost:8080/users').subscribe(
-      (users: User[]) => {
-        this.users = users;
-      },
-      (error) => {
-        console.log('Une erreur s\'est produite lors de la récupération des utilisateurs :', error);
-      }
-    );
+    this.userService.users$.subscribe((users: User[]) => {
+      this.users = users;
+    });
+  }
+
+  onSubmit(): void {
+    this.userService.addUser(this.newUser);
+    this.newUser = { id: 0, firstName: '', lastName: '', occupation: '', age: 0 };
+  }
+
+  deleteUser(userId: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cet utilisateur ?')) {
+      this.userService.deleteUser(userId);
+    }
+  }
+
+  // Fonction pour activer ou désactiver l'édition pour un utilisateur.
+  editUser(user: User): void {
+    this.userService.toggleEditUser(user);
+  }
+
+  // Fonction pour mettre à jour un utilisateur.
+  updateUser(user: User): void {
+    this.userService.updateUser(user);
+    // Désactivez le mode d'édition après la mise à jour.
+    this.userService.toggleEditUser(user);
   }
 }
